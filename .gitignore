@@ -12,3 +12,6 @@ media
 .rdb
 /dump.rdb
 dump.rdb
+__pycache__/
+store/__pycache__/
+core/__pycache__/
