@@ -1,0 +1,14 @@
+local.py
+media
+*.pyc
+*.sqlite3
+.idea
+.env
+*.DS_Store
+/static
+/staticfiles
+.DS_Store
+/images
+.rdb
+/dump.rdb
+dump.rdb
