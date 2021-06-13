@@ -43,8 +43,7 @@ MIDDLEWARE = [
 AUTH_USER_MODEL = 'account.User'
 LOGIN_REDIRECT_URL = '/account/dashboard'
 LOGIN_URL = '/account/login'
-
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
