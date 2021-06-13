@@ -40,10 +40,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-AUTH_USER_MODEL = 'account.User'
-LOGIN_REDIRECT_URL = '/account/dashboard'
-LOGIN_URL = '/account/login'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
@@ -124,3 +120,10 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+
+AUTH_USER_MODEL = 'account.User'
+LOGIN_REDIRECT_URL = '/account/dashboard'
+LOGIN_URL = '/account/login'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
