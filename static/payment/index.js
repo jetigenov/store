@@ -1,7 +1,7 @@
 //'use strict';
 
 
-var stripe = Stripe('');
+var stripe = Stripe('pk_test_51J7GxpCNwARdG6DH8Sd1SF3uaKp1C3Ti9bJ5cbjVb9Fw5Wp08UVvJns6ab0jq778w3AjnbNReCthx6KjCK2TNq7H00NeUoDDXw');
 
 var elem = document.getElementById('submit');
 clientsecret = elem.getAttribute('data-secret');
@@ -44,7 +44,7 @@ var postCode = document.getElementById("postCode").value;
 
   $.ajax({
     type: "POST",
-    url: 'http://127.0.0.1:8000/orders/add/',
+    url: 'http://127.0.0.1:8010/orders/add/',
     data: {
       order_key: clientsecret,
       csrfmiddlewaretoken: CSRF_TOKEN,
@@ -75,7 +75,7 @@ var postCode = document.getElementById("postCode").value;
             // execution. Set up a webhook or plugin to listen for the
             // payment_intent.succeeded event that handles any business critical
             // post-payment actions.
-            window.location.replace("http://127.0.0.1:8000/payment/orderplaced/");
+            window.location.replace("http://127.0.0.1:8010/payment/orderplaced/");
           }
         }
       });
@@ -87,3 +87,4 @@ var postCode = document.getElementById("postCode").value;
 
 
 });
+
