@@ -1,7 +1,7 @@
 //'use strict';
 
 
-var stripe = Stripe('pk_test_51J7GxpCNwARdG6DH8Sd1SF3uaKp1C3Ti9bJ5cbjVb9Fw5Wp08UVvJns6ab0jq778w3AjnbNReCthx6KjCK2TNq7H00NeUoDDXw');
+var stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
 
 var elem = document.getElementById('submit');
 clientsecret = elem.getAttribute('data-secret');
@@ -87,4 +87,3 @@ var postCode = document.getElementById("postCode").value;
 
 
 });
-

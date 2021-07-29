@@ -3,7 +3,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+SECRET_KEY = '3xk*)i0x#k$btl=(6q)te!19=mp6d)lm1+zl#ts4ewxi3-!vm_'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -131,7 +131,9 @@ LOGIN_URL = '/account/login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+# Stripe Payment
+os.environ.setdefault('STRIPE_PUBLISHABLE_KEY', 'pk_test_51J7GxpCNwARdG6DH8Sd1SF3uaKp1C3Ti9bJ5cbjVb9Fw5Wp08UVvJns6ab0jq778w3AjnbNReCthx6KjCK2TNq7H00NeUoDDXw')
+STRIPE_SECRET_KEY = 'sk_test_51J7GxpCNwARdG6DHOQcJ9EMJ7yiRfOUbqDSaqC8F7afQw6dQTVepN8eyoYs61H1nC9xB3ArPuXzP71JoJvXy8LZ600X8EjxkK8'
+# stripe listen --forward-to localhost:8010/payment/webhook/
 
-PUBLISHABLE_KEY = 'pk_test_51J7GxpCNwARdG6DH8Sd1SF3uaKp1C3Ti9bJ5cbjVb9Fw5Wp08UVvJns6ab0jq778w3AjnbNReCthx6KjCK2TNq7H00NeUoDDXw'
-SECRET_KEY = 'sk_test_51J7GxpCNwARdG6DHOQcJ9EMJ7yiRfOUbqDSaqC8F7afQw6dQTVepN8eyoYs61H1nC9xB3ArPuXzP71JoJvXy8LZ600X8EjxkK8'
 # STRIPE_ENDPOINT_SECRET = ''
