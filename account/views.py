@@ -17,7 +17,7 @@ from django.contrib.auth.decorators import login_required
 def dashboard(request):
     orders = user_orders(request)
     return render(request,
-                  'account/user/dashboard.html', {'orders': orders})
+                  'account/dashboard/dashboard.html', {'orders': orders})
 
 
 def account_register(request):
@@ -73,7 +73,7 @@ def edit_details(request):
     else:
         user_form = UserEditForm(instance=request.user)
 
-    return render(request, 'account/user/edit_details.html', {'user_form': user_form})
+    return render(request, 'account/dashboard/edit_details.html', {'user_form': user_form})
 
 
 @login_required()
