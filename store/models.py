@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.template.defaultfilters import slugify
 from mptt.models import MPTTModel, TreeForeignKey
 from django.utils.translation import gettext_lazy as _
 
@@ -23,6 +24,11 @@ class Category(MPTTModel):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)
 
 
 class ProductType(models.Model):
@@ -54,11 +60,11 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.RESTRICT)
     title = models.CharField(verbose_name=_('title'), help_text=_('Required'), max_length=255)
     description = models.TextField(verbose_name=_('description'), help_text=_('Not Required'), blank=True)
-    slug = models.SlugField(max_length=255)
-    regular_price = models.DecimalField(verbose_name=_('Regular Price'), help_text=_('Maximum 999.99'),
+    slug = models.SlugField(verbose_name=_('Slug'), max_length=255, unique=True)
+    price = models.DecimalField(verbose_name=_('Price'), help_text=_('Maximum 999.99'),
                                         error_messages={'name': {'max_length':
                                                                  _('The price must be between 0 and 999.99')}},
-                                        max_digits=5, decimal_places=2)
+                                        max_digits=5, decimal_places=2, null=True, blank=True)
     discount_price = models.DecimalField(verbose_name=_('Discount Price'), help_text=_('Maximum 999.99'),
                                          max_digits=5, decimal_places=2)
     is_active = models.BooleanField(verbose_name=_('Product visibility'), help_text=_('Change product visibility'),
@@ -76,6 +82,11 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        return super().save(*args, **kwargs)
 
 
 class ProductSpecificationValue(models.Model):
