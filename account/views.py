@@ -1,17 +1,34 @@
 from django.contrib.auth import login, logout
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
 from orders.views import user_orders
+from store.models import Product
 from .forms import RegistrationForm, UserEditForm, UserAddressForm
 from .models import Customer, Address
 from .token import account_activation_token
 from django.contrib.auth.decorators import login_required
+
+
+@login_required
+def wishlist(request):
+    products = Product.objects.filter(users_wishlist=request.user)
+    return render(request, 'account/dashboard/user_wish_list.html', {'products': products})
+
+
+@login_required
+def add_to_wishlist(request, id):
+    product = get_object_or_404(Product, id=id)
+    if product.users_wishlist.filter(id=request.user.id).exists():
+        product.users_wishlist.remove(request.user)
+    else:
+        product.users_wishlist.add(request.user)
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 
 @login_required()
@@ -106,6 +123,7 @@ def add_address(request):
         address_form = UserAddressForm()
     return render(request, "account/dashboard/edit_addresses.html", {"form": address_form})
 
+
 @login_required
 def edit_address(request, id):
     if request.method == "POST":
@@ -119,10 +137,12 @@ def edit_address(request, id):
         address_form = UserAddressForm(instance=address)
     return render(request, "account/dashboard/edit_addresses.html", {"form": address_form})
 
+
 @login_required
 def delete_address(request, id):
     address = Address.objects.filter(pk=id, customer=request.user).delete()
     return redirect("account:addresses")
+
 
 @login_required
 def set_default(request, id):
