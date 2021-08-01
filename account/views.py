@@ -1,14 +1,15 @@
 from django.contrib.auth import login, logout
 from django.contrib.sites.shortcuts import get_current_site
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
+from django.urls import reverse
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
 from orders.views import user_orders
-from .forms import RegistrationForm, UserEditForm
-from .models import Customer
+from .forms import RegistrationForm, UserEditForm, UserAddressForm
+from .models import Customer, Address
 from .token import account_activation_token
 from django.contrib.auth.decorators import login_required
 
@@ -17,7 +18,8 @@ from django.contrib.auth.decorators import login_required
 def dashboard(request):
     orders = user_orders(request)
     return render(request,
-                  'account/dashboard/dashboard.html', {'orders': orders})
+                  'account/dashboard/dashboard.html',
+                  {'section': 'profile', 'orders': orders})
 
 
 def account_register(request):
