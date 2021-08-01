@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, render
 
 
 def product_all(request):
-    products = Product.objects.all()
+    products = Product.objects.prefetch_related('product_image').filter(is_active=True)
     return render(request, 'store/index.html', {'products': products})
 
 
