@@ -18,7 +18,7 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def wishlist(request):
     products = Product.objects.filter(users_wishlist=request.user)
-    return render(request, 'account/dashboard/user_wish_list.html', {'products': products})
+    return render(request, 'account/dashboard/user_wish_list.html', {'wishlist': products})
 
 
 @login_required
