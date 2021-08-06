@@ -5,7 +5,6 @@ from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
 from django.core.mail import send_mail
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django_countries.fields import CountryField
 
 
 class CustomAccountManager(BaseUserManager):
@@ -39,11 +38,9 @@ class CustomAccountManager(BaseUserManager):
 
 
 class Customer(AbstractBaseUser, PermissionsMixin):
-
     email = models.EmailField(_('email address'), unique=True)
     name = models.CharField(max_length=150)
-    phone = models.CharField(max_length=150, blank=True)
-    # User Status
+    mobile = models.CharField(max_length=20, blank=True)
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
@@ -70,8 +67,11 @@ class Customer(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.name
 
-
 class Address(models.Model):
+    """
+    Address
+    """
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     customer = models.ForeignKey(Customer, verbose_name=_("Customer"), on_delete=models.CASCADE)
     full_name = models.CharField(_("Full Name"), max_length=150)

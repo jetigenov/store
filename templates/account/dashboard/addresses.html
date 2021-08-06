@@ -1,5 +1,8 @@
 {% extends "account/sub_base.html" %}
 {% block title %}Edit Addresses{% endblock %}
+
+
+
 {% block sub_content %}
 <h1 class="h2">Your Addresses</h1>
 <div>Manage your <b>addresses</b> and delivery preferences</div>
@@ -30,7 +33,7 @@
       <div class="card pb-3">
         <div class="card-header bg-white small text-muted">
           {% if address.default %}
-            Default
+            Default 
           {% endif %}
           &nbsp;
         </div>

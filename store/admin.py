@@ -12,7 +12,6 @@ from .models import (
 )
 
 admin.site.register(Category, MPTTModelAdmin)
-prepopulated_fields = {'slug': ('name',)}
 
 
 class ProductSpecificationInline(admin.TabularInline):
@@ -41,5 +40,3 @@ class ProductAdmin(admin.ModelAdmin):
         ProductImageInline,
     ]
     prepopulated_fields = {'slug': ('title',)}
-
-
