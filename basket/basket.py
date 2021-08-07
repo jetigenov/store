@@ -1,6 +1,8 @@
 from decimal import Decimal
 
 from django.conf import settings
+
+from checkout.models import DeliveryOptions
 from store.models import Product
 
 
@@ -65,16 +67,26 @@ class Basket:
     def get_subtotal_price(self):
         return sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
 
-    def get_total_price(self):
+    def get_delivery_price(self):
+        new_price = 0.00
 
+        if 'purchase' in self.session:
+            new_price = DeliveryOptions.objects.get(id=self.session['purchase']['delivery_id']).delivery_price
+        return new_price
+
+    def basket_update_delivery(self, deliveryprice=0):
+        subtotal = sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
+        total = subtotal + Decimal(deliveryprice)
+        return total
+
+    def get_total_price(self):
+        new_price = 0.00
         subtotal = sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
 
-        if subtotal == 0:
-            shipping = Decimal(0.00)
-        else:
-            shipping = Decimal(11.50)
+        if 'purchase' in self.session:
+            new_price = DeliveryOptions.objects.get(id=self.session['purchase']['delivery_id']).delivery_price
 
-        total = subtotal + Decimal(shipping)
+        total = subtotal + Decimal(new_price)
         return total
 
     def delete(self, product):
