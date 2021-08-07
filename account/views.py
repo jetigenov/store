@@ -41,6 +41,12 @@ def dashboard(request):
 
 
 @login_required
+def order(request):
+    orders = user_orders(request)
+    return render(request, "account/dashboard/orders.html", {"section": "profile", "orders": orders})
+
+
+@login_required
 def edit_details(request):
     if request.method == "POST":
         user_form = UserEditForm(instance=request.user, data=request.POST)
