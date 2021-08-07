@@ -55,5 +55,8 @@ def delivery_address(request):
 
 @login_required
 def payment_selection(request):
+    if 'address' not in request.session:
+        messages.success(request, 'Please select address option')
+        return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
     return render(request, 'checkout/payment_selection.html', {})
