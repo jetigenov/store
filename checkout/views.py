@@ -1,3 +1,5 @@
+import json
+
 from django.contrib import messages
 from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -61,3 +63,13 @@ def payment_selection(request):
         return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
     return render(request, 'checkout/payment_selection.html', {})
+
+
+@login_required
+def payment_complete(request):
+    PPClient = PayPalClient()
+
+    body = json.loads(request.body)
+    data = body['orderID']
+    user_id = request.user.id
+    requestorder = OrderGetRequest(data)
