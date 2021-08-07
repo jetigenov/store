@@ -44,4 +44,16 @@ def delivery_address(request):
 
     addresses = Address.objects.filter(customer=request.user).order_by('-default')
 
+    if 'address' not in request.session:
+        session['address'] = {'address_id': str(addresses[0].id)}
+    else:
+        session['address'] = {'address_id': str(addresses[0].id)}
+        session.modified = True
+
     return render(request, 'checkout/delivery_address.html', {'addresses': addresses})
+
+
+@login_required
+def payment_selection(request):
+
+    return render(request, 'checkout/payment_selection.html', {})
