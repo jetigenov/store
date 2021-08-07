@@ -8,6 +8,8 @@ from account.models import Address
 from basket.basket import Basket
 from orders.models import OrderItem, Order
 from .models import DeliveryOptions
+from paypalcheckoutsdk.orders import OrdersGetRequest
+from .paypal import PayPalClient
 
 
 @login_required
