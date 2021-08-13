@@ -73,7 +73,7 @@ DATABASES = {
         'NAME': 'ecommerce',
         'USER': 'jetigenov',
         'PASSWORD': 'ecommerce',
-        'HOST': 'localhost'
+        'HOST': 'db'
     }
 }
 

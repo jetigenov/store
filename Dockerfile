@@ -1,6 +1,16 @@
-FROM python:3
-ENV PYTHONBUFFERED=1
-WORKDIR /code
-COPY requirements.txt /code/
-RUN pip install -r requirements.txt
-COPY . /code/
+FROM python:3.7
+
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /app
+
+ADD . /app
+
+
+COPY requirements.txt /app/requirements.txt
+
+RUN  pip install -r requirements.txt
+
+COPY . /app/
+
+EXPOSE 8000
