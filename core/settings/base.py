@@ -12,7 +12,7 @@ SECRET_KEY = '90qqloqp*m3!5e5xzfd=q=#l_9z8e^e2qv)jc-c7e+55@*4f@%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['jetigenov.com']
 
 
 # Application definition
