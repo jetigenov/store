@@ -10,9 +10,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = '90qqloqp*m3!5e5xzfd=q=#l_9z8e^e2qv)jc-c7e+55@*4f@%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['jetigenov.com', '46.101.115.37', 'www.jetigenov.com']
+ALLOWED_HOSTS = ['jetigenov.com', '46.101.115.37', 'www.jetigenov.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -118,10 +118,10 @@ USE_TZ = True
 
 BASKET_SESSION_ID = 'basket'
 
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+STATIC_URL = '/static_root/'
+MEDIA_URL = '/media_root/'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_root')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 
